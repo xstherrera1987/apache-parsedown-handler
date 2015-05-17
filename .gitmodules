@@ -1,6 +1,9 @@
-[submodule "parsedown-handler/parsedown"]
-	path = parsedown-handler/parsedown
+[submodule "libs/parsedown"]
+	path = libs/parsedown
 	url = git://github.com/erusev/parsedown.git
-[submodule "parsedown-handler/gfm-css"]
-	path = parsedown-handler/gfm-css
+[submodule "libs/gfm-css"]
+	path = libs/gfm-css
 	url = git://github.com/sindresorhus/github-markdown-css.git
+[submodule "libs/highlight-js"]
+	path = libs/highlight-js
+	url = git@github.com:isagalaev/highlight.js.git
