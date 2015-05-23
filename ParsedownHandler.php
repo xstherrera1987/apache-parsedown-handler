@@ -1,15 +1,20 @@
-<?php include "ParsedownInit.php";
+<?php
+	include ".\ParsedownInit.php";
+	$basePath = $ParsedownHandler->basePath;
+	$baseUrl = $ParsedownHandler->baseUrl;
+
 	header('Content-type: text/html; charset=utf-8');
-	require( dirname(__FILE__) . '/parsedown/Parsedown.php' );
-?><!DOCTYPE html><!-- Parsedown Handler -->
+	require( $basePath . '/parsedown/Parsedown.php' );
+?><!DOCTYPE html><!-- apache-markdown-handler -->
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<link href="/tmpl/css/bootstrap-3.2.0.min.css" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="/web-lib/apache-parsedown-handler/parsedown-handler/gfm-css/github-markdown.css">
-	<link rel="stylesheet" href="/web-lib/apache-parsedown-handler/lib/highlight-8.5.min.css">
+	<!-- TODO: move bootstrap styles into assets/ -->
+	<link rel="stylesheet" href="<?= $baseUrl ?>/bootstrap/bootstrap-3.2.0.min.css" />
+	<link rel="stylesheet" href="<?= $baseUrl ?>gfm-css/github-markdown.css">
+	<link rel="stylesheet" href="<?= $baseUrl ?>/assets/highlight-8.5.min.css">
 	<style>
 	    .markdown-body {
 	        min-width: 200px;
@@ -22,15 +27,18 @@
 <body>
 <?php
 	$legalExtensions = array('md', 'markdown');
+	echo "begin processing." . "\n";
+	echo $_SERVER['PATH_TRANSLATED'];
+	
 	$file = realpath($_SERVER['PATH_TRANSLATED']);
 
-	if ($file
+	if ( NULL != $file && file_exists($file)
 		&& in_array( strtolower(substr($file, strrpos($file,'.')+1)), $legalExtensions)): ?>
 		
 		<div class='container'>
 			<div class='row markdown-body'>
 				<?php
-					$Parsedown = new Parsedown();	
+					$Parsedown = new Parsedown();
 					echo $Parsedown->text( file_get_contents($file) );
 				?>
 			</div>
@@ -40,8 +48,8 @@
 	<?php endif; ?>
 
 	
-	<script src="/web-lib/apache-parsedown-handler/lib/jquery-1.11.3.min.js"></script>
-	<script src="/web-lib/apache-parsedown-handler/lib/highlight-8.5.min.js"></script>
+	<script src="<?= $baseUrl ?>lib/jquery-1.11.3.min.js"></script>
+	<script src="<?= $baseUrl ?>lib/highlight-8.5.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('pre code').each(function(i, block) {

@@ -1,2 +1,2 @@
-Action markdown /parsedown-handler/handler.php
+Action markdown /apache-parsedown-handler/handler.php
 AddHandler markdown .md

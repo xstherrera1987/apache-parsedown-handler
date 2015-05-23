@@ -1,13 +1,11 @@
 <?php
 	class ParsedownHandlerSettings {
-		public $basedir = '';
-
+		public $baseUrl = '/apache-markdown-handler/';
+		public $docRootPath = '/var/www/';
+		public $appBasePath = '/var/www/apache-markdown/handler';
 	}
 
 	$ParsedownHandler = new ParsedownHandlerSettings();
 
-	if ( file_exists('settings-user.php') ) {
-		include 'settings.php'
-	}
-
-<!-- basedir <?= $ParsedownHandler->basedir ?> -->
+	if ( file_exists('settings.php') ) { include 'settings.php'; }
+?>
