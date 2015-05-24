@@ -7,3 +7,9 @@
 [submodule "libs/highlight-js"]
 	path = libs/highlight-js
 	url = git@github.com:isagalaev/highlight.js.git
+[submodule "libs/jquery"]
+	path = libs/jquery
+	url = git@github.com:jquery/jquery.git
+[submodule "libs/bootstrap"]
+	path = libs/bootstrap
+	url = git@github.com:twbs/bootstrap.git
