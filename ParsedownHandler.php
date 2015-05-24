@@ -1,10 +1,13 @@
 <?php
-	include ".\ParsedownInit.php";
-	$basePath = $ParsedownHandler->basePath;
+	$nl = "<br />\n";
+
+	include "ParsedownInit.php";
+
+	$basePath = $ParsedownHandler->appBasePath;
 	$baseUrl = $ParsedownHandler->baseUrl;
 
 	header('Content-type: text/html; charset=utf-8');
-	require( $basePath . '/parsedown/Parsedown.php' );
+	require( $basePath . '/libs/parsedown/Parsedown.php' );
 ?><!DOCTYPE html><!-- apache-markdown-handler -->
 <html>
 <head>
@@ -27,19 +30,16 @@
 <body>
 <?php
 	$legalExtensions = array('md', 'markdown');
-	echo "begin processing." . "\n";
-	echo $_SERVER['PATH_TRANSLATED'];
-	
-	$file = realpath($_SERVER['PATH_TRANSLATED']);
+	$markdownFile = realpath($_SERVER['PATH_TRANSLATED']);
 
-	if ( NULL != $file && file_exists($file)
-		&& in_array( strtolower(substr($file, strrpos($file,'.')+1)), $legalExtensions)): ?>
+	if ( NULL != $markdownFile && file_exists($markdownFile)
+		&& in_array( strtolower(substr($markdownFile, strrpos($markdownFile,'.')+1)), $legalExtensions)): ?>
 		
 		<div class='container'>
 			<div class='row markdown-body'>
 				<?php
 					$Parsedown = new Parsedown();
-					echo $Parsedown->text( file_get_contents($file) );
+					echo $Parsedown->text( file_get_contents($markdownFile) );
 				?>
 			</div>
 		</div>
