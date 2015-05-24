@@ -1,33 +1,21 @@
 <?php
-	$nl = "<br />\n";
-
 	include "ParsedownInit.php";
-
-	$basePath = $ParsedownHandler->appBasePath;
 	$baseUrl = $ParsedownHandler->baseUrl;
+	include 'libs/parsedown/Parsedown.php';
 
 	header('Content-type: text/html; charset=utf-8');
-	require( $basePath . '/libs/parsedown/Parsedown.php' );
-?><!DOCTYPE html><!-- apache-markdown-handler -->
+?><!DOCTYPE html><!-- apache-parsedown-handler -->
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<!-- TODO: move bootstrap styles into assets/ -->
-	<link rel="stylesheet" href="<?= $baseUrl ?>/bootstrap/bootstrap-3.2.0.min.css" />
-	<link rel="stylesheet" href="<?= $baseUrl ?>gfm-css/github-markdown.css">
-	<link rel="stylesheet" href="<?= $baseUrl ?>/assets/highlight-8.5.min.css">
-	<style>
-	    .markdown-body {
-	        min-width: 200px;
-	        max-width: 790px;
-	        margin: 0 auto;
-	        padding: 30px;
-	    }
-	</style>
+	<link rel="stylesheet" href="<?= $baseUrl ?>libs/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="<?= $baseUrl ?>libs/highlight-js/src/styles/github.css">
+	<style> .hljs { background: transparent; } </style>
 </head>
 <body>
+	<script src="<?= $baseUrl ?>libs/jquery/dist/jquery.min.js"></script>
 <?php
 	$legalExtensions = array('md', 'markdown');
 	$markdownFile = realpath($_SERVER['PATH_TRANSLATED']);
@@ -36,20 +24,20 @@
 		&& in_array( strtolower(substr($markdownFile, strrpos($markdownFile,'.')+1)), $legalExtensions)): ?>
 		
 		<div class='container'>
-			<div class='row markdown-body'>
+			<div class='row'>
+				<div class='col-xs-8 col-xs-offset-2'>
 				<?php
 					$Parsedown = new Parsedown();
 					echo $Parsedown->text( file_get_contents($markdownFile) );
 				?>
+				</div>
 			</div>
 		</div>
 	<?php else: ?>
 		<p>Bad filename given</p>
 	<?php endif; ?>
-
 	
-	<script src="<?= $baseUrl ?>lib/jquery-1.11.3.min.js"></script>
-	<script src="<?= $baseUrl ?>lib/highlight-8.5.min.js"></script>
+	<script src="<?= $baseUrl ?>libs/highlight-js/src/highlight.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('pre code').each(function(i, block) {

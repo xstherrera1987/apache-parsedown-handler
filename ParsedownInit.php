@@ -2,9 +2,10 @@
 	class ParsedownHandlerSettings {
 		public $baseUrl = '/apache-markdown-handler/';
 		public $docRootPath;
-		public $appBasePath = __DIR__;
+		public $appBasePath;
 
 		function __construct() {
+			$this->appBasePath = __DIR__;
 			$this->docRootPath = $_SERVER["DOCUMENT_ROOT"];
 		}
 	}
