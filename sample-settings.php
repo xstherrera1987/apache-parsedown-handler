@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 	apache-parsedown-handler sample settings
 
